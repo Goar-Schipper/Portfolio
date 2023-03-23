@@ -14,9 +14,19 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('projects.index', ['projects' => Project::all()]);
+        $filter = $request->get('categories');
+
+        if ($filter) {
+            $projects = Project::whereHas('categories', function ($query) use ($filter) {
+                $query->whereIn('id', $filter);
+            })->get();
+        } else {
+            $projects = Project::all();
+        }
+
+        return view('projects.index', ['projects' => $projects, 'categories' => Category::all(), 'filter' => $filter ?: [] ]);
     }
 
     /**
@@ -27,6 +37,7 @@ class ProjectController extends Controller
     public function create()
     {
         return view('projects.create',['categories' => Category::all()]);
+
     }
 
     /**
@@ -50,9 +61,13 @@ class ProjectController extends Controller
             'created_at' =>$request->get('created_at'),
         ]);
 
+
         $project->save();
 
-        return redirect(route('projects.index'));
+        $project->categories()->detach();
+        $project->categories()->attach($request->get('category'));
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -98,7 +113,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return view('projects.index', ['projects' => Project::all()]);
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -109,6 +124,10 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->categories()->detach();
+        $project->delete();
+
+        return redirect()->route('projects.index');
     }
 }

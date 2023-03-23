@@ -18,6 +18,9 @@ use App\Models\Category;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return view('admin');
+});
 
 Route:: resource('projects', \App\Http\Controllers\ProjectController::class);
 
@@ -42,8 +45,8 @@ Route::delete('/dashboard/contact/{id}', [\App\Http\Controllers\Admin\ContactCon
 Route::get('/dashboard/contact', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('dashboard.contact.index');
 
 
-
-
+Route::delete('/projects/{id}', [\App\Http\Controllers\ProjectController::class, 'destroy'])->name('projects.delete');
+Route::delete('/categories/{id}', [\App\Http\Controllers\CatergoryController::class, 'destroy'])->name('categories.delete');
 
 
 

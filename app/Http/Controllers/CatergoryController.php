@@ -37,7 +37,11 @@ class CatergoryController extends Controller
     public function store(Request $request)
     {
         $category = new Category([
-            'category' => $request->get('category'),
+            'title' => $request->get('title'),
+        ]);
+
+        $request->validate([
+            'title' => 'required'
         ]);
 
         $category->save();
@@ -65,6 +69,8 @@ class CatergoryController extends Controller
     public function edit($id)
     {
         return view('category.edit',['category' => Category::findOrFail($id)]);
+
+        $category->save();
     }
 
     /**
@@ -79,6 +85,9 @@ class CatergoryController extends Controller
         $category = Category::findOrFail($id);
 
         $category->title = $request->get('title');
+        $request->validate([
+            'title' => 'required'
+        ]);
 
         $category->save();
 
@@ -93,6 +102,9 @@ class CatergoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('categories.index');
     }
 }
