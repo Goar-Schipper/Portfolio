@@ -6,9 +6,16 @@ module.exports = {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        "./src/**/*.{html,js}",
+        "./node_modules/tw-elements/dist/js/**/*.js",
     ],
 
     theme: {
+        screens:
+            {
+                'mobile':{'max': '700px'},
+                'tablet':{'max': '1600px'},
+            },
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
@@ -16,5 +23,7 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [require('@tailwindcss/forms'),require("tw-elements/dist/plugin")],
+
+
 };

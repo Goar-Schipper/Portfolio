@@ -1,5 +1,4 @@
-<footer
-    class="bg-[#0c111b] text-center text-neutral-600 dark:bg-[#0c111b] dark:text-neutral-200 lg:text-left">
+<footer class="bg-[#0c111b] text-center text-neutral-600 dark:bg-[#0c111b] dark:text-neutral-200 lg:text-left w-full">
     <div
         class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
         <div class="mr-12 hidden lg:block">
@@ -151,7 +150,6 @@
         <a
             class="font-semibold text-neutral-600 dark:text-neutral-400"
             href="https://tailwind-elements.com/"
-        >Tailwind Elements</a
-        >
+        >Tailwind Elements</a>
     </div>
 </footer>

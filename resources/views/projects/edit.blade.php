@@ -1,6 +1,6 @@
 <x-guest_layout>
     <div class="flex justify-center h-[600px] items-center flex-row">
-        <form class="text-black" action="{{ route('projects.update', $project->id) }}" method="post">
+        <form class="text-black" action="{{ route('projects.update', $project->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <p class="text-white font-bold text-xl">Titel van het Project</p>
@@ -14,6 +14,10 @@
             <p class="text-white font-bold text-xl">Datum van het Project</p>
             <div>
                 <input class="rounded-3xl" type="datetime-local" name="created_at" value="{{ $project->created_at }}">
+            </div>
+            <p class="text-white font-bold text-xl">afb van het Project</p>
+            <div>
+                <input class="rounded-3xl" type="file" name="image2">
             </div>
             <p class="text-white font-bold text-xl">Catogorieën van het Project</p>
             <div class="text-white">

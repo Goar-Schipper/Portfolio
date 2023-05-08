@@ -103,6 +103,7 @@ class CatergoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
+        $category->projects()->detach();
         $category->delete();
 
         return redirect()->route('categories.index');

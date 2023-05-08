@@ -12,7 +12,6 @@
                     <button type="submit">Delete</button>
                 </form>
             </div>
-        @endforeach
-    </div>
+        @endforeach    </div>
     </body>
 </x-guest-layout>

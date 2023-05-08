@@ -23,7 +23,7 @@
             <div class="pt-4 flex justify-end">
                 <button class="bg-[#0c111b] hover:bg-sky-700 text-white font-bold py-2 px-4 border-b-4 rounded-3xl " type="submit">submit</button>
             </div>
-
+            <input type="file" name="image">
         </form>
     </div>
 </x-guest-layout>

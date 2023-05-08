@@ -21,6 +21,6 @@ class ContactController extends Controller
     {
         Contact::findOrFail($id)->delete();
 
-        return redirect()->route('dashboard.contact.index')->with('Message', 'lijp');
+        return redirect()->route('dashboard.contact.index');
     }
 }

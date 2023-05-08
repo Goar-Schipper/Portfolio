@@ -16,4 +16,8 @@ class Category extends Model
         'title',
     ];
 
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }

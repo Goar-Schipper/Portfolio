@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Project;
+use http\Message;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -56,7 +57,6 @@ class ProjectController extends Controller
 
         $project = new Project([
             'title' => $request->get('title'),
-            'image' => '',
             'description' =>$request->get('description'),
             'created_at' =>$request->get('created_at'),
         ]);
@@ -103,8 +103,14 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
 
+        if ($request->file('image2'))
+            $path = $request->file('image2')->store('images', ['disk' => 'public']);
+
         $project->title = $request->get('title');
-        $project->image = '';
+
+        if (isset($path))
+            $project->image = $path;
+
         $project->description = $request->get('description');
         $project->created_at = $request->get('created_at');
 
@@ -113,7 +119,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('msg', 'Project aangepast');
     }
 
     /**
@@ -128,6 +134,6 @@ class ProjectController extends Controller
         $project->categories()->detach();
         $project->delete();
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('msg2', 'Project verwijdered');
     }
 }
